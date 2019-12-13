@@ -234,5 +234,40 @@ namespace SistemaHotel
                 }
             }
         }
+
+        private void btnCheckout_Click(object sender, EventArgs e)
+        {
+            if (dgvQuartos.CurrentRow.Index != -1)
+            {                  
+                int _id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value.ToString());
+                using (hotelEntities ef = new hotelEntities())
+                {
+                    var escolhido = ef.reserva.Find(_id);
+                    if (escolhido.dt_entrada != null)
+                    {
+                        DialogResult conf = MessageBox.Show(
+                            "Realmente deseja realizar check-out?",
+                            "Atualizar Reserva",
+                            MessageBoxButtons.YesNoCancel,
+                            MessageBoxIcon.Question);
+                        if (conf == DialogResult.Yes)
+                        {
+                            escolhido.dt_saida = DateTime.Now;
+                            ef.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "Check-in ainda não realizado!",
+                            "Atualizar Reserva",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                    }
+                    
+                }
+                CarregarGrid();
+            }
+        }
     }
 }

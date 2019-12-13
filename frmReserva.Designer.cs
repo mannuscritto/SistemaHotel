@@ -307,6 +307,7 @@
             this.btnCheckout.TabIndex = 4;
             this.btnCheckout.Text = "Check-out";
             this.btnCheckout.UseVisualStyleBackColor = true;
+            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
             // 
             // frmReserva
             // 
