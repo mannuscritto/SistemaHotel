@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="hotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="primeiro_nome" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ultimo_nome" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="doc_rg" Type="varchar" MaxLength="30" />
+          <Property Name="doc_cpf" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="dt_nasc" Type="date" Nullable="false" />
+          <Property Name="ativo" Type="bit" />
+        </EntityType>
+        <EntityType Name="comodidade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="preco" Type="money" />
+          <Property Name="ativo" Type="bit" />
+        </EntityType>
+        <EntityType Name="comodidade_quarto">
+          <Key>
+            <PropertyRef Name="fk_comodidade" />
+            <PropertyRef Name="fk_quarto" />
+          </Key>
+          <Property Name="fk_comodidade" Type="int" Nullable="false" />
+          <Property Name="fk_quarto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="despesa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_reserva" Type="int" Nullable="false" />
+          <Property Name="valor" Type="money" Nullable="false" />
+          <Property Name="data_hora" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fatura">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_reserva" Type="int" Nullable="false" />
+          <Property Name="valor_reserva" Type="money" Nullable="false" />
+          <Property Name="dt_vencimento" Type="date" Nullable="false" />
+          <Property Name="multa_diaria" Type="float" />
+          <Property Name="dt_pagamento" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="quarto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="andar" Type="int" Nullable="false" />
+          <Property Name="numero" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="int" Nullable="false" />
+          <Property Name="tamanho" Type="int" Nullable="false" />
+          <Property Name="qtd_camas" Type="int" Nullable="false" />
+          <Property Name="preco" Type="money" Nullable="false" />
+          <Property Name="ativo" Type="bit" />
+        </EntityType>
+        <EntityType Name="reserva">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dt_cadastro" Type="datetime" Nullable="false" />
+          <Property Name="dt_entrada" Type="datetime" />
+          <Property Name="dt_inicio" Type="date" Nullable="false" />
+          <Property Name="dt_termino" Type="date" Nullable="false" />
+          <Property Name="dt_saida" Type="datetime" />
+          <Property Name="fk_quarto" Type="int" Nullable="false" />
+          <Property Name="fk_cliente" Type="int" Nullable="false" />
+          <Property Name="ativo" Type="bit" />
+        </EntityType>
+        <Association Name="FK__comodidad__fk_co__3D5E1FD2">
+          <End Role="comodidade" Type="Self.comodidade" Multiplicity="1" />
+          <End Role="comodidade_quarto" Type="Self.comodidade_quarto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comodidade">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comodidade_quarto">
+              <PropertyRef Name="fk_comodidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comodidad__fk_qu__3E52440B">
+          <End Role="quarto" Type="Self.quarto" Multiplicity="1" />
+          <End Role="comodidade_quarto" Type="Self.comodidade_quarto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quarto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comodidade_quarto">
+              <PropertyRef Name="fk_quarto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__despesa__fk_rese__4BAC3F29">
+          <End Role="reserva" Type="Self.reserva" Multiplicity="1" />
+          <End Role="despesa" Type="Self.despesa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserva">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="despesa">
+              <PropertyRef Name="fk_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fatura__fk_reser__48CFD27E">
+          <End Role="reserva" Type="Self.reserva" Multiplicity="1" />
+          <End Role="fatura" Type="Self.fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserva">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fatura">
+              <PropertyRef Name="fk_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reserva__fk_clie__44FF419A">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reserva">
+              <PropertyRef Name="fk_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reserva__fk_quar__440B1D61">
+          <End Role="quarto" Type="Self.quarto" Multiplicity="1" />
+          <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quarto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reserva">
+              <PropertyRef Name="fk_quarto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hotelModelStoreContainer">
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comodidade" EntityType="Self.comodidade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comodidade_quarto" EntityType="Self.comodidade_quarto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="despesa" EntityType="Self.despesa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fatura" EntityType="Self.fatura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="quarto" EntityType="Self.quarto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reserva" EntityType="Self.reserva" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__comodidad__fk_co__3D5E1FD2" Association="Self.FK__comodidad__fk_co__3D5E1FD2">
+            <End Role="comodidade" EntitySet="comodidade" />
+            <End Role="comodidade_quarto" EntitySet="comodidade_quarto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comodidad__fk_qu__3E52440B" Association="Self.FK__comodidad__fk_qu__3E52440B">
+            <End Role="quarto" EntitySet="quarto" />
+            <End Role="comodidade_quarto" EntitySet="comodidade_quarto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__despesa__fk_rese__4BAC3F29" Association="Self.FK__despesa__fk_rese__4BAC3F29">
+            <End Role="reserva" EntitySet="reserva" />
+            <End Role="despesa" EntitySet="despesa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fatura__fk_reser__48CFD27E" Association="Self.FK__fatura__fk_reser__48CFD27E">
+            <End Role="reserva" EntitySet="reserva" />
+            <End Role="fatura" EntitySet="fatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reserva__fk_clie__44FF419A" Association="Self.FK__reserva__fk_clie__44FF419A">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="reserva" EntitySet="reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reserva__fk_quar__440B1D61" Association="Self.FK__reserva__fk_quar__440B1D61">
+            <End Role="quarto" EntitySet="quarto" />
+            <End Role="reserva" EntitySet="reserva" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="primeiro_nome" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ultimo_nome" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="doc_rg" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="doc_cpf" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dt_nasc" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ativo" Type="Boolean" />
+          <NavigationProperty Name="reserva" Relationship="Self.FK__reserva__fk_clie__571DF1D5" FromRole="cliente" ToRole="reserva" />
+        </EntityType>
+        <EntityType Name="comodidade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="preco" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ativo" Type="Boolean" />
+          <NavigationProperty Name="quarto" Relationship="Self.comodidade_quarto" FromRole="comodidade" ToRole="quarto" />
+        </EntityType>
+        <EntityType Name="despesa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_reserva" Type="Int32" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="data_hora" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="reserva" Relationship="Self.FK__despesa__fk_rese__5DCAEF64" FromRole="despesa" ToRole="reserva" />
+        </EntityType>
+        <EntityType Name="fatura">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_reserva" Type="Int32" Nullable="false" />
+          <Property Name="valor_reserva" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="dt_vencimento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="multa_diaria" Type="Double" />
+          <Property Name="dt_pagamento" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="reserva" Relationship="Self.FK__fatura__fk_reser__5AEE82B9" FromRole="fatura" ToRole="reserva" />
+        </EntityType>
+        <EntityType Name="quarto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="andar" Type="Int32" Nullable="false" />
+          <Property Name="numero" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="Int32" Nullable="false" />
+          <Property Name="tamanho" Type="Int32" Nullable="false" />
+          <Property Name="qtd_camas" Type="Int32" Nullable="false" />
+          <Property Name="preco" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ativo" Type="Boolean" />
+          <NavigationProperty Name="reserva" Relationship="Self.FK__reserva__fk_quar__5629CD9C" FromRole="quarto" ToRole="reserva" />
+          <NavigationProperty Name="comodidade" Relationship="Self.comodidade_quarto" FromRole="quarto" ToRole="comodidade" />
+        </EntityType>
+        <EntityType Name="reserva">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dt_entrada" Type="DateTime" Precision="3" />
+          <Property Name="dt_inicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dt_termino" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="dt_saida" Type="DateTime" Precision="3" />
+          <Property Name="fk_quarto" Type="Int32" Nullable="false" />
+          <Property Name="fk_cliente" Type="Int32" Nullable="false" />
+          <Property Name="ativo" Type="Boolean" />
+          <NavigationProperty Name="cliente" Relationship="Self.FK__reserva__fk_clie__571DF1D5" FromRole="reserva" ToRole="cliente" />
+          <NavigationProperty Name="despesa" Relationship="Self.FK__despesa__fk_rese__5DCAEF64" FromRole="reserva" ToRole="despesa" />
+          <NavigationProperty Name="fatura" Relationship="Self.FK__fatura__fk_reser__5AEE82B9" FromRole="reserva" ToRole="fatura" />
+          <NavigationProperty Name="quarto" Relationship="Self.FK__reserva__fk_quar__5629CD9C" FromRole="reserva" ToRole="quarto" />
+          <Property Name="dt_cadastro" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK__reserva__fk_clie__571DF1D5">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reserva">
+              <PropertyRef Name="fk_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__despesa__fk_rese__5DCAEF64">
+          <End Role="reserva" Type="Self.reserva" Multiplicity="1" />
+          <End Role="despesa" Type="Self.despesa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserva">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="despesa">
+              <PropertyRef Name="fk_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fatura__fk_reser__5AEE82B9">
+          <End Role="reserva" Type="Self.reserva" Multiplicity="1" />
+          <End Role="fatura" Type="Self.fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserva">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fatura">
+              <PropertyRef Name="fk_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reserva__fk_quar__5629CD9C">
+          <End Role="quarto" Type="Self.quarto" Multiplicity="1" />
+          <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quarto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reserva">
+              <PropertyRef Name="fk_quarto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comodidade_quarto">
+          <End Role="comodidade" Type="Self.comodidade" Multiplicity="*" />
+          <End Role="quarto" Type="Self.quarto" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="hotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
+          <EntitySet Name="comodidade" EntityType="Self.comodidade" />
+          <EntitySet Name="despesa" EntityType="Self.despesa" />
+          <EntitySet Name="fatura" EntityType="Self.fatura" />
+          <EntitySet Name="quarto" EntityType="Self.quarto" />
+          <EntitySet Name="reserva" EntityType="Self.reserva" />
+          <AssociationSet Name="FK__reserva__fk_clie__571DF1D5" Association="Self.FK__reserva__fk_clie__571DF1D5">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="reserva" EntitySet="reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__despesa__fk_rese__5DCAEF64" Association="Self.FK__despesa__fk_rese__5DCAEF64">
+            <End Role="reserva" EntitySet="reserva" />
+            <End Role="despesa" EntitySet="despesa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fatura__fk_reser__5AEE82B9" Association="Self.FK__fatura__fk_reser__5AEE82B9">
+            <End Role="reserva" EntitySet="reserva" />
+            <End Role="fatura" EntitySet="fatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reserva__fk_quar__5629CD9C" Association="Self.FK__reserva__fk_quar__5629CD9C">
+            <End Role="quarto" EntitySet="quarto" />
+            <End Role="reserva" EntitySet="reserva" />
+          </AssociationSet>
+          <AssociationSet Name="comodidade_quarto" Association="Self.comodidade_quarto">
+            <End Role="comodidade" EntitySet="comodidade" />
+            <End Role="quarto" EntitySet="quarto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="hotelModelStoreContainer" CdmEntityContainer="hotelEntities">
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="hotelModel.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="primeiro_nome" ColumnName="primeiro_nome" />
+                <ScalarProperty Name="ultimo_nome" ColumnName="ultimo_nome" />
+                <ScalarProperty Name="doc_rg" ColumnName="doc_rg" />
+                <ScalarProperty Name="doc_cpf" ColumnName="doc_cpf" />
+                <ScalarProperty Name="dt_nasc" ColumnName="dt_nasc" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comodidade">
+            <EntityTypeMapping TypeName="hotelModel.comodidade">
+              <MappingFragment StoreEntitySet="comodidade">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="preco" ColumnName="preco" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="despesa">
+            <EntityTypeMapping TypeName="hotelModel.despesa">
+              <MappingFragment StoreEntitySet="despesa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fk_reserva" ColumnName="fk_reserva" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="data_hora" ColumnName="data_hora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fatura">
+            <EntityTypeMapping TypeName="hotelModel.fatura">
+              <MappingFragment StoreEntitySet="fatura">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fk_reserva" ColumnName="fk_reserva" />
+                <ScalarProperty Name="valor_reserva" ColumnName="valor_reserva" />
+                <ScalarProperty Name="dt_vencimento" ColumnName="dt_vencimento" />
+                <ScalarProperty Name="multa_diaria" ColumnName="multa_diaria" />
+                <ScalarProperty Name="dt_pagamento" ColumnName="dt_pagamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="quarto">
+            <EntityTypeMapping TypeName="hotelModel.quarto">
+              <MappingFragment StoreEntitySet="quarto">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="andar" ColumnName="andar" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="tamanho" ColumnName="tamanho" />
+                <ScalarProperty Name="qtd_camas" ColumnName="qtd_camas" />
+                <ScalarProperty Name="preco" ColumnName="preco" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reserva">
+            <EntityTypeMapping TypeName="hotelModel.reserva">
+              <MappingFragment StoreEntitySet="reserva">
+                <ScalarProperty Name="dt_cadastro" ColumnName="dt_cadastro" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dt_entrada" ColumnName="dt_entrada" />
+                <ScalarProperty Name="dt_inicio" ColumnName="dt_inicio" />
+                <ScalarProperty Name="dt_termino" ColumnName="dt_termino" />
+                <ScalarProperty Name="dt_saida" ColumnName="dt_saida" />
+                <ScalarProperty Name="fk_quarto" ColumnName="fk_quarto" />
+                <ScalarProperty Name="fk_cliente" ColumnName="fk_cliente" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="comodidade_quarto" TypeName="hotelModel.comodidade_quarto" StoreEntitySet="comodidade_quarto">
+            <EndProperty Name="comodidade">
+              <ScalarProperty Name="id" ColumnName="fk_comodidade" />
+            </EndProperty>
+            <EndProperty Name="quarto">
+              <ScalarProperty Name="id" ColumnName="fk_quarto" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
