@@ -82,6 +82,29 @@
           <Property Name="ativo" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'hotel.dbo.vw_quartos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_quartos">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="andar" />
+            <PropertyRef Name="numero" />
+            <PropertyRef Name="tipo" />
+            <PropertyRef Name="tamanho" />
+            <PropertyRef Name="qtd_camas" />
+            <PropertyRef Name="preco" />
+            <PropertyRef Name="fk_quarto" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="andar" Type="int" Nullable="false" />
+          <Property Name="numero" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="int" Nullable="false" />
+          <Property Name="tamanho" Type="int" Nullable="false" />
+          <Property Name="qtd_camas" Type="int" Nullable="false" />
+          <Property Name="preco" Type="money" Nullable="false" />
+          <Property Name="ativo" Type="bit" />
+          <Property Name="fk_quarto" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'hotel.dbo.vw_reservas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_reservas">
           <Key>
@@ -188,6 +211,19 @@ warning 6002: The table/view 'hotel.dbo.vw_reservas' does not have a primary key
           <EntitySet Name="fatura" EntityType="Self.fatura" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="quarto" EntityType="Self.quarto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reserva" EntityType="Self.reserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_quartos" EntityType="Self.vw_quartos" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vw_quartos].[id] AS [id], 
+[vw_quartos].[andar] AS [andar], 
+[vw_quartos].[numero] AS [numero], 
+[vw_quartos].[tipo] AS [tipo], 
+[vw_quartos].[tamanho] AS [tamanho], 
+[vw_quartos].[qtd_camas] AS [qtd_camas], 
+[vw_quartos].[preco] AS [preco], 
+[vw_quartos].[ativo] AS [ativo], 
+[vw_quartos].[fk_quarto] AS [fk_quarto]
+FROM [dbo].[vw_quartos] AS [vw_quartos]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_reservas" EntityType="Self.vw_reservas" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [vw_reservas].[id] AS [id], 
@@ -391,6 +427,7 @@ FROM [dbo].[vw_reservas] AS [vw_reservas]</DefiningQuery>
             <End Role="quarto" EntitySet="quarto" />
           </AssociationSet>
           <EntitySet Name="vw_reservas" EntityType="hotelModel.vw_reservas" />
+          <EntitySet Name="vw_quartos" EntityType="hotelModel.vw_quartos" />
         </EntityContainer>
         <EntityType Name="vw_reservas">
           <Key>
@@ -416,6 +453,27 @@ FROM [dbo].[vw_reservas] AS [vw_reservas]</DefiningQuery>
           <Property Name="primeiro_nome" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="ultimo_nome" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="numero" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_quartos">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="andar" />
+            <PropertyRef Name="numero" />
+            <PropertyRef Name="tipo" />
+            <PropertyRef Name="tamanho" />
+            <PropertyRef Name="qtd_camas" />
+            <PropertyRef Name="preco" />
+            <PropertyRef Name="fk_quarto" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="andar" Type="Int32" Nullable="false" />
+          <Property Name="numero" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="Int32" Nullable="false" />
+          <Property Name="tamanho" Type="Int32" Nullable="false" />
+          <Property Name="qtd_camas" Type="Int32" Nullable="false" />
+          <Property Name="preco" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ativo" Type="Boolean" />
+          <Property Name="fk_quarto" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -519,6 +577,21 @@ FROM [dbo].[vw_reservas] AS [vw_reservas]</DefiningQuery>
                 <ScalarProperty Name="dt_inicio" ColumnName="dt_inicio" />
                 <ScalarProperty Name="dt_entrada" ColumnName="dt_entrada" />
                 <ScalarProperty Name="dt_cadastro" ColumnName="dt_cadastro" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_quartos">
+            <EntityTypeMapping TypeName="hotelModel.vw_quartos">
+              <MappingFragment StoreEntitySet="vw_quartos">
+                <ScalarProperty Name="fk_quarto" ColumnName="fk_quarto" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="preco" ColumnName="preco" />
+                <ScalarProperty Name="qtd_camas" ColumnName="qtd_camas" />
+                <ScalarProperty Name="tamanho" ColumnName="tamanho" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="andar" ColumnName="andar" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

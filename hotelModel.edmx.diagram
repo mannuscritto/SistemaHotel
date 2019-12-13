@@ -17,6 +17,7 @@
         <AssociationConnector Association="hotelModel.FK__reserva__fk_quar__5629CD9C" ManuallyRouted="false" />
         <AssociationConnector Association="hotelModel.comodidade_quarto" ManuallyRouted="false" />
         <EntityTypeShape EntityType="hotelModel.vw_reservas" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="hotelModel.vw_quartos" Width="1.5" PointX="7.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
