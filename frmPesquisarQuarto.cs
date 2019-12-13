@@ -25,12 +25,34 @@ namespace SistemaHotel
         {
             using (hotelEntities ef = new hotelEntities())
             {
-                var listaQuartos = ef.quarto
-                    .Where(q => q.ativo == true)
-                    .Select(q => new { q.id, q.numero, q.andar, q.tipo, q.tamanho })
+                if (cbDisponiveis.Checked)
+                {
+                    var listaQuartos = ef.vw_quartos
+                        .Select(q => new
+                        {
+                            ID = q.id,
+                            Numero = q.numero,
+                            Andar = q.andar,
+                            Preco = q.preco
+                        })
                     .ToList();
-
-                dgvQuartos.DataSource = listaQuartos;
+                    dgvQuartos.DataSource = listaQuartos;
+                }
+                else
+                {
+                    var listaQuartos = ef.quarto
+                   .Where(q => q.ativo == true)
+                   .Select(q => new
+                   {
+                       ID = q.id,
+                       Numero = q.numero,
+                       Andar = q.andar,
+                       Preco = q.preco
+                   })
+                   .ToList();
+                    dgvQuartos.DataSource = listaQuartos;
+                }
+                
             }
         }
 
@@ -47,7 +69,19 @@ namespace SistemaHotel
                 
                 using (hotelEntities ef = new hotelEntities())
                 {
-                    this.escolhido = ef.quarto.Find(escolhido_id);
+                    if (ef.vw_reservas.ToList().Exists(r => r.fk_quarto == escolhido_id))
+                    {
+                        MessageBox.Show(
+                            "Este quarto já está reservado!",
+                            "Pesquisar Quarto",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                    {
+                        this.escolhido = ef.quarto.Find(escolhido_id);
+                    }
                 }
 
                 this.DialogResult = DialogResult.OK;
@@ -71,6 +105,11 @@ namespace SistemaHotel
         private void dgvQuartos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             btnOk.PerformClick();
+        }
+
+        private void cbDisponiveis_CheckedChanged(object sender, EventArgs e)
+        {
+            CarregarGrid();
         }
     }
 }

@@ -35,6 +35,7 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.dgvQuartos = new System.Windows.Forms.DataGridView();
+            this.cbDisponiveis = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuartos)).BeginInit();
@@ -44,7 +45,7 @@
             // 
             this.txtTermo.Location = new System.Drawing.Point(12, 25);
             this.txtTermo.Name = "txtTermo";
-            this.txtTermo.Size = new System.Drawing.Size(449, 20);
+            this.txtTermo.Size = new System.Drawing.Size(280, 20);
             this.txtTermo.TabIndex = 0;
             this.txtTermo.TextChanged += new System.EventHandler(this.txtQuarto_TextChanged);
             // 
@@ -59,6 +60,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cbDisponiveis);
             this.panel1.Controls.Add(this.lblPesquisarQuarto);
             this.panel1.Controls.Add(this.txtTermo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -103,14 +105,27 @@
             this.dgvQuartos.AllowUserToAddRows = false;
             this.dgvQuartos.AllowUserToDeleteRows = false;
             this.dgvQuartos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvQuartos.Location = new System.Drawing.Point(0, 57);
+            this.dgvQuartos.Location = new System.Drawing.Point(0, 63);
             this.dgvQuartos.MultiSelect = false;
             this.dgvQuartos.Name = "dgvQuartos";
             this.dgvQuartos.ReadOnly = true;
             this.dgvQuartos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuartos.Size = new System.Drawing.Size(473, 363);
+            this.dgvQuartos.Size = new System.Drawing.Size(473, 357);
             this.dgvQuartos.TabIndex = 4;
             this.dgvQuartos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuartos_CellDoubleClick);
+            // 
+            // cbDisponiveis
+            // 
+            this.cbDisponiveis.AutoSize = true;
+            this.cbDisponiveis.Checked = true;
+            this.cbDisponiveis.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbDisponiveis.Location = new System.Drawing.Point(298, 27);
+            this.cbDisponiveis.Name = "cbDisponiveis";
+            this.cbDisponiveis.Size = new System.Drawing.Size(163, 17);
+            this.cbDisponiveis.TabIndex = 2;
+            this.cbDisponiveis.Text = "Somente quartos disponíveis";
+            this.cbDisponiveis.UseVisualStyleBackColor = true;
+            this.cbDisponiveis.CheckedChanged += new System.EventHandler(this.cbDisponiveis_CheckedChanged);
             // 
             // frmPesquisarQuarto
             // 
@@ -143,5 +158,6 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.DataGridView dgvQuartos;
+        private System.Windows.Forms.CheckBox cbDisponiveis;
     }
 }
