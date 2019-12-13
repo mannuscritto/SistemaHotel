@@ -211,5 +211,28 @@ namespace SistemaHotel
                 }
             }
         }
+
+        private void btnCheckin_Click(object sender, EventArgs e)
+        {
+            if (dgvQuartos.CurrentRow.Index != -1)
+            {
+                DialogResult conf = MessageBox.Show(
+                    "Realmente deseja realizar check-in?",
+                    "Atualizar Reserva",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+                if (conf == DialogResult.Yes)
+                {
+                    int _id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value.ToString());
+                    using (hotelEntities ef = new hotelEntities())
+                    {
+                        var escolhido = ef.reserva.Find(_id);
+                        escolhido.dt_entrada = DateTime.Now;
+                        ef.SaveChanges();
+                    }
+                    CarregarGrid();
+                }
+            }
+        }
     }
 }

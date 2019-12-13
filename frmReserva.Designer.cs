@@ -50,6 +50,8 @@
             this.btnSalvar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSair = new System.Windows.Forms.Button();
+            this.btnCheckin = new System.Windows.Forms.Button();
+            this.btnCheckout = new System.Windows.Forms.Button();
             this.tcReserva.SuspendLayout();
             this.tpgReservas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuartos)).BeginInit();
@@ -97,6 +99,8 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btnCheckout);
+            this.panel4.Controls.Add(this.btnCheckin);
             this.panel4.Controls.Add(this.btnExcluir);
             this.panel4.Controls.Add(this.btnEditar);
             this.panel4.Controls.Add(this.btnNovo);
@@ -285,6 +289,25 @@
             this.btnSair.UseVisualStyleBackColor = true;
             this.btnSair.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // btnCheckin
+            // 
+            this.btnCheckin.Location = new System.Drawing.Point(625, 3);
+            this.btnCheckin.Name = "btnCheckin";
+            this.btnCheckin.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckin.TabIndex = 3;
+            this.btnCheckin.Text = "Check-in";
+            this.btnCheckin.UseVisualStyleBackColor = true;
+            this.btnCheckin.Click += new System.EventHandler(this.btnCheckin_Click);
+            // 
+            // btnCheckout
+            // 
+            this.btnCheckout.Location = new System.Drawing.Point(706, 3);
+            this.btnCheckout.Name = "btnCheckout";
+            this.btnCheckout.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckout.TabIndex = 4;
+            this.btnCheckout.Text = "Check-out";
+            this.btnCheckout.UseVisualStyleBackColor = true;
+            // 
             // frmReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -332,5 +355,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.MaskedTextBox txtDtTermino;
         private System.Windows.Forms.MaskedTextBox txtDtInicio;
+        private System.Windows.Forms.Button btnCheckout;
+        private System.Windows.Forms.Button btnCheckin;
     }
 }
