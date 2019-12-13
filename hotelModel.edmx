@@ -91,8 +91,11 @@ warning 6002: The table/view 'hotel.dbo.vw_reservas' does not have a primary key
             <PropertyRef Name="dt_termino" />
             <PropertyRef Name="fk_quarto" />
             <PropertyRef Name="fk_cliente" />
+            <PropertyRef Name="primeiro_nome" />
+            <PropertyRef Name="ultimo_nome" />
+            <PropertyRef Name="numero" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="dt_cadastro" Type="datetime" Nullable="false" />
           <Property Name="dt_entrada" Type="datetime" />
           <Property Name="dt_inicio" Type="date" Nullable="false" />
@@ -101,6 +104,9 @@ warning 6002: The table/view 'hotel.dbo.vw_reservas' does not have a primary key
           <Property Name="fk_quarto" Type="int" Nullable="false" />
           <Property Name="fk_cliente" Type="int" Nullable="false" />
           <Property Name="ativo" Type="bit" />
+          <Property Name="primeiro_nome" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ultimo_nome" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="numero" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__comodidad__fk_co__3D5E1FD2">
           <End Role="comodidade" Type="Self.comodidade" Multiplicity="1" />
@@ -192,7 +198,10 @@ warning 6002: The table/view 'hotel.dbo.vw_reservas' does not have a primary key
 [vw_reservas].[dt_saida] AS [dt_saida], 
 [vw_reservas].[fk_quarto] AS [fk_quarto], 
 [vw_reservas].[fk_cliente] AS [fk_cliente], 
-[vw_reservas].[ativo] AS [ativo]
+[vw_reservas].[ativo] AS [ativo], 
+[vw_reservas].[primeiro_nome] AS [primeiro_nome], 
+[vw_reservas].[ultimo_nome] AS [ultimo_nome], 
+[vw_reservas].[numero] AS [numero]
 FROM [dbo].[vw_reservas] AS [vw_reservas]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__comodidad__fk_co__3D5E1FD2" Association="Self.FK__comodidad__fk_co__3D5E1FD2">
@@ -391,6 +400,9 @@ FROM [dbo].[vw_reservas] AS [vw_reservas]</DefiningQuery>
             <PropertyRef Name="dt_termino" />
             <PropertyRef Name="fk_quarto" />
             <PropertyRef Name="fk_cliente" />
+            <PropertyRef Name="primeiro_nome" />
+            <PropertyRef Name="ultimo_nome" />
+            <PropertyRef Name="numero" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="dt_cadastro" Type="DateTime" Nullable="false" Precision="3" />
@@ -401,6 +413,9 @@ FROM [dbo].[vw_reservas] AS [vw_reservas]</DefiningQuery>
           <Property Name="fk_quarto" Type="Int32" Nullable="false" />
           <Property Name="fk_cliente" Type="Int32" Nullable="false" />
           <Property Name="ativo" Type="Boolean" />
+          <Property Name="primeiro_nome" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ultimo_nome" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="numero" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -493,6 +508,9 @@ FROM [dbo].[vw_reservas] AS [vw_reservas]</DefiningQuery>
           <EntitySetMapping Name="vw_reservas">
             <EntityTypeMapping TypeName="hotelModel.vw_reservas">
               <MappingFragment StoreEntitySet="vw_reservas">
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="ultimo_nome" ColumnName="ultimo_nome" />
+                <ScalarProperty Name="primeiro_nome" ColumnName="primeiro_nome" />
                 <ScalarProperty Name="ativo" ColumnName="ativo" />
                 <ScalarProperty Name="fk_cliente" ColumnName="fk_cliente" />
                 <ScalarProperty Name="fk_quarto" ColumnName="fk_quarto" />

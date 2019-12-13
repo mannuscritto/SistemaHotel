@@ -140,6 +140,9 @@
     <Compile Include="reserva.cs">
       <DependentUpon>hotelModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="vw_reservas.cs">
+      <DependentUpon>hotelModel.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmCliente.resx">
       <DependentUpon>frmCliente.cs</DependentUpon>
     </EmbeddedResource>

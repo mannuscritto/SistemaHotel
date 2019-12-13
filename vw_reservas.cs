@@ -23,5 +23,8 @@ namespace SistemaHotel
         public int fk_quarto { get; set; }
         public int fk_cliente { get; set; }
         public Nullable<bool> ativo { get; set; }
+        public string primeiro_nome { get; set; }
+        public string ultimo_nome { get; set; }
+        public int numero { get; set; }
     }
 }
