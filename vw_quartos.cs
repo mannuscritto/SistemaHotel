@@ -22,6 +22,5 @@ namespace SistemaHotel
         public int qtd_camas { get; set; }
         public decimal preco { get; set; }
         public Nullable<bool> ativo { get; set; }
-        public int fk_quarto { get; set; }
     }
 }
