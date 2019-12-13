@@ -26,9 +26,16 @@ namespace SistemaHotel
         {
             using (hotelEntities ef = new hotelEntities())
             {
-                var reservas = ef.reserva
-                    .Where(r => r.ativo == true)
-                    .Select(r => new { r.id, r.dt_inicio, r.dt_termino, r.quarto.numero })
+                var reservas = ef.vw_reservas
+                    .Select(r => new
+                    {
+                        ID = r.id,
+                        DataEntrada = r.dt_entrada,
+                        DataSaida = r.dt_saida,
+                        Cliente = r.primeiro_nome,
+                        Quarto = r.numero,
+                        Status = r.dt_entrada == null ? "Em aberto" : "Iniciada"
+                    })
                     .ToList();
 
                 dgvQuartos.DataSource = reservas;
