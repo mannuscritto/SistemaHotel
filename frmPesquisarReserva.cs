@@ -12,7 +12,7 @@ namespace SistemaHotel
 {
     public partial class frmPesquisarReserva : Form
     {
-        reserva escolhido { get; set; }
+        public reserva escolhido { get; set; }
         public frmPesquisarReserva()
         {
             InitializeComponent();
