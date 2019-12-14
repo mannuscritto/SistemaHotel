@@ -40,11 +40,13 @@ namespace SistemaHotel
                     .Select(r => new
                     {
                         ID = r.id,
+                        DataInicio = r.dt_inicio,
                         DataEntrada = r.dt_entrada,
+                        DataTermino = r.dt_termino,
                         DataSaida = r.dt_saida,
                         Cliente = r.primeiro_nome,
                         Quarto = r.numero,
-                        Status = r.dt_entrada == null ? "Em aberto" : "Iniciada"
+                        Status = r.dt_entrada == null ? "Pendente" : "Em aberto"
                     })
                     .ToList();
 
@@ -128,18 +130,29 @@ namespace SistemaHotel
             }
         }
 
-        private bool checarDatas(reserva r)
+        private bool checarDatas(reserva n)
         {
             using (hotelEntities ef = new hotelEntities())
             {
                 var listaReservas = ef.vw_reservas
-                    .Where(vr => vr.fk_quarto == r.fk_quarto
-                        && DateTime.Compare(vr.dt_inicio, r.dt_inicio) > 0
-                        && DateTime.Compare(vr.dt_termino, r.dt_termino) < 0)
+                    .Where(e => e.numero == this.temp_quarto.numero
+                        && DateTime.Compare(e.dt_inicio, n.dt_termino) <= 0
+                        && DateTime.Compare(e.dt_termino, n.dt_inicio) >= 0)
                     .ToList();
-                Console.WriteLine("Reservas em conflito: {0}", listaReservas.Count);
+                if (listaReservas.Count > 0)
+                {
+                    MessageBox.Show(
+                        "Há reservas em conflito!",
+                        "Cadastrar Reserva",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
-            return true;
         }
 
         private void limparCampos()

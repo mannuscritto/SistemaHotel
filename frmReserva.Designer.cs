@@ -89,6 +89,7 @@
             // 
             this.dgvQuartos.AllowUserToAddRows = false;
             this.dgvQuartos.AllowUserToDeleteRows = false;
+            this.dgvQuartos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvQuartos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvQuartos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvQuartos.Location = new System.Drawing.Point(3, 3);
