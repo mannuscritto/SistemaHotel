@@ -25,12 +25,34 @@ namespace SistemaHotel
         {
             using (hotelEntities ef = new hotelEntities())
             {
-                var listaQuartos = ef.quarto
-                    .Where(q => q.ativo == true)
-                    .Select(q => new { q.id, q.numero, q.andar, q.tipo, q.tamanho })
+                if (cbDisponiveis.Checked)
+                {
+                    var listaQuartos = ef.vw_quartos
+                        .Select(q => new
+                        {
+                            ID = q.id,
+                            Numero = q.numero,
+                            Andar = q.andar,
+                            Preco = q.preco
+                        })
                     .ToList();
-
-                dgvQuartos.DataSource = listaQuartos;
+                    dgvQuartos.DataSource = listaQuartos;
+                }
+                else
+                {
+                    var listaQuartos = ef.quarto
+                   .Where(q => q.ativo == true)
+                   .Select(q => new
+                   {
+                       ID = q.id,
+                       Numero = q.numero,
+                       Andar = q.andar,
+                       Preco = q.preco
+                   })
+                   .ToList();
+                    dgvQuartos.DataSource = listaQuartos;
+                }
+                
             }
         }
 
@@ -48,9 +70,35 @@ namespace SistemaHotel
                 using (hotelEntities ef = new hotelEntities())
                 {
                     this.escolhido = ef.quarto.Find(escolhido_id);
-                }
 
-                this.DialogResult = DialogResult.OK;
+                    if (ef.vw_reservas.ToList().Exists(r => r.fk_quarto == escolhido_id))
+                    {
+                        DialogResult res = MessageBox.Show(
+                            "Este quarto já está reservado.\nDeseja ver esta reserva?",
+                            "Pesquisar Quarto",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Error);
+
+                        if (res == DialogResult.Yes)
+                        {
+                            List<reserva> reservas = ef.reserva
+                                .Where(r => r.fk_quarto == this.escolhido.id
+                                    && r.dt_saida == null)
+                                .ToList();
+
+                            foreach (reserva r in reservas)
+                            {
+                                this.escolhido.reserva.Add(r);
+                            }
+                        }
+                        else
+                        {
+                            this.escolhido.reserva = new List<reserva>();
+                            this.escolhido.reserva.Clear();
+                        }
+                    }
+                    this.DialogResult = DialogResult.OK;
+                }
             }
             else
             {
@@ -71,6 +119,11 @@ namespace SistemaHotel
         private void dgvQuartos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             btnOk.PerformClick();
+        }
+
+        private void cbDisponiveis_CheckedChanged(object sender, EventArgs e)
+        {
+            CarregarGrid();
         }
     }
 }

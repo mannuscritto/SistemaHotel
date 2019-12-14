@@ -51,8 +51,17 @@ namespace SistemaHotel
             {
                 if (pesquisa.ShowDialog() == DialogResult.OK)
                 {
-                    frmQuarto quarto = new frmQuarto(pesquisa.escolhido.id);
-                    quarto.Show();
+                    //List<reserva> reservas = pesquisa.escolhido.reserva.ToList();
+                    if (pesquisa.escolhido.reserva.ToList().Count > 0)
+                    {
+                        frmReserva reserva = new frmReserva(pesquisa.escolhido.reserva.ElementAt(0).id);
+                        reserva.Show();
+                    }
+                    else
+                    {
+                        frmQuarto quarto = new frmQuarto(pesquisa.escolhido.id);
+                        quarto.Show();
+                    }
                 }
             }
         }
@@ -71,8 +80,14 @@ namespace SistemaHotel
 
         private void reservaToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            frmPesquisarReserva reserva = new frmPesquisarReserva();
-            reserva.Show();
+            using (frmPesquisarReserva pesquisa = new frmPesquisarReserva())
+            {
+                if (pesquisa.ShowDialog() == DialogResult.OK)
+                {
+                    frmReserva reserva = new frmReserva(pesquisa.escolhido.id);
+                    reserva.Show();
+                }
+            }
         }
     }
 }

@@ -32,6 +32,8 @@
             this.tpgReservas = new System.Windows.Forms.TabPage();
             this.dgvQuartos = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnCheckout = new System.Windows.Forms.Button();
+            this.btnCheckin = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnNovo = new System.Windows.Forms.Button();
@@ -47,6 +49,7 @@
             this.txtQuarto = new System.Windows.Forms.TextBox();
             this.txtCliente = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSair = new System.Windows.Forms.Button();
@@ -86,6 +89,7 @@
             // 
             this.dgvQuartos.AllowUserToAddRows = false;
             this.dgvQuartos.AllowUserToDeleteRows = false;
+            this.dgvQuartos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvQuartos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvQuartos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvQuartos.Location = new System.Drawing.Point(3, 3);
@@ -94,9 +98,12 @@
             this.dgvQuartos.ReadOnly = true;
             this.dgvQuartos.Size = new System.Drawing.Size(786, 339);
             this.dgvQuartos.TabIndex = 5;
+            this.dgvQuartos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvQuartos_CellMouseDoubleClick);
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btnCheckout);
+            this.panel4.Controls.Add(this.btnCheckin);
             this.panel4.Controls.Add(this.btnExcluir);
             this.panel4.Controls.Add(this.btnEditar);
             this.panel4.Controls.Add(this.btnNovo);
@@ -105,6 +112,26 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(786, 29);
             this.panel4.TabIndex = 4;
+            // 
+            // btnCheckout
+            // 
+            this.btnCheckout.Location = new System.Drawing.Point(706, 3);
+            this.btnCheckout.Name = "btnCheckout";
+            this.btnCheckout.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckout.TabIndex = 4;
+            this.btnCheckout.Text = "Check-out";
+            this.btnCheckout.UseVisualStyleBackColor = true;
+            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
+            // 
+            // btnCheckin
+            // 
+            this.btnCheckin.Location = new System.Drawing.Point(625, 3);
+            this.btnCheckin.Name = "btnCheckin";
+            this.btnCheckin.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckin.TabIndex = 3;
+            this.btnCheckin.Text = "Check-in";
+            this.btnCheckin.UseVisualStyleBackColor = true;
+            this.btnCheckin.Click += new System.EventHandler(this.btnCheckin_Click);
             // 
             // btnExcluir
             // 
@@ -249,12 +276,23 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnCancelar);
             this.panel2.Controls.Add(this.btnSalvar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(3, 255);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(786, 116);
             this.panel2.TabIndex = 3;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(86, 3);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 7;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
             // 
             // btnSalvar
             // 
@@ -332,5 +370,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.MaskedTextBox txtDtTermino;
         private System.Windows.Forms.MaskedTextBox txtDtInicio;
+        private System.Windows.Forms.Button btnCheckout;
+        private System.Windows.Forms.Button btnCheckin;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }

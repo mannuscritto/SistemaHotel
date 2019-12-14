@@ -15,6 +15,7 @@ namespace SistemaHotel
         private char Operacao { get; set; }
         private cliente temp_cliente = null;
         private quarto temp_quarto = null;
+        private int escolhidoId { get; set; }
 
         public frmReserva()
         {
@@ -22,13 +23,31 @@ namespace SistemaHotel
             CarregarGrid();
         }
 
+        public frmReserva(int _id)
+        {
+            InitializeComponent();
+            CarregarGrid();
+            this.Operacao = 'e';
+            preencherCampos(_id);
+            tcReserva.SelectedTab = tpgCriarReserva;
+        }
+
         private void CarregarGrid()
         {
             using (hotelEntities ef = new hotelEntities())
             {
-                var reservas = ef.reserva
-                    .Where(r => r.ativo == true)
-                    .Select(r => new { r.id, r.dt_inicio, r.dt_termino, r.quarto.numero })
+                var reservas = ef.vw_reservas
+                    .Select(r => new
+                    {
+                        ID = r.id,
+                        DataInicio = r.dt_inicio,
+                        DataEntrada = r.dt_entrada,
+                        DataTermino = r.dt_termino,
+                        DataSaida = r.dt_saida,
+                        Cliente = r.primeiro_nome,
+                        Quarto = r.numero,
+                        Status = r.dt_entrada == null ? "Pendente" : "Em aberto"
+                    })
                     .ToList();
 
                 dgvQuartos.DataSource = reservas;
@@ -74,7 +93,9 @@ namespace SistemaHotel
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             reserva r;
-            bool valido = checarCampos(out r);
+            bool valido;
+            valido = checarCampos(out r);
+            valido = checarDatas(r);
 
             if (valido && this.Operacao == 'n')
             {
@@ -89,7 +110,7 @@ namespace SistemaHotel
             }
             if (valido && this.Operacao == 'e')
             {
-                int _id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value.ToString());
+                int _id = this.escolhidoId;
                 using (hotelEntities ef = new hotelEntities())
                 {
                     reserva novo = ef.reserva.Find(_id);
@@ -106,6 +127,31 @@ namespace SistemaHotel
                 limparCampos();
                 tcReserva.SelectedTab = tpgReservas;
                 CarregarGrid();
+            }
+        }
+
+        private bool checarDatas(reserva n)
+        {
+            using (hotelEntities ef = new hotelEntities())
+            {
+                var listaReservas = ef.vw_reservas
+                    .Where(e => e.numero == this.temp_quarto.numero
+                        && DateTime.Compare(e.dt_inicio, n.dt_termino) <= 0
+                        && DateTime.Compare(e.dt_termino, n.dt_inicio) >= 0)
+                    .ToList();
+                if (listaReservas.Count > 0)
+                {
+                    MessageBox.Show(
+                        "Há reservas em conflito!",
+                        "Cadastrar Reserva",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
 
@@ -177,6 +223,7 @@ namespace SistemaHotel
 
         private void preencherCampos(int _id)
         {
+            this.escolhidoId = _id;
             using (hotelEntities ef = new hotelEntities())
             {
                 reserva r = ef.reserva.Find(_id);
@@ -210,6 +257,75 @@ namespace SistemaHotel
                     CarregarGrid();
                 }
             }
+        }
+
+        private void btnCheckin_Click(object sender, EventArgs e)
+        {
+            if (dgvQuartos.CurrentRow.Index != -1)
+            {
+                DialogResult conf = MessageBox.Show(
+                    "Realmente deseja realizar check-in?",
+                    "Atualizar Reserva",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+                if (conf == DialogResult.Yes)
+                {
+                    int _id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value.ToString());
+                    using (hotelEntities ef = new hotelEntities())
+                    {
+                        var escolhido = ef.reserva.Find(_id);
+                        escolhido.dt_entrada = DateTime.Now;
+                        ef.SaveChanges();
+                    }
+                    CarregarGrid();
+                }
+            }
+        }
+
+        private void btnCheckout_Click(object sender, EventArgs e)
+        {
+            if (dgvQuartos.CurrentRow.Index != -1)
+            {                  
+                int _id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value.ToString());
+                using (hotelEntities ef = new hotelEntities())
+                {
+                    var escolhido = ef.reserva.Find(_id);
+                    if (escolhido.dt_entrada != null)
+                    {
+                        DialogResult conf = MessageBox.Show(
+                            "Realmente deseja realizar check-out?",
+                            "Atualizar Reserva",
+                            MessageBoxButtons.YesNoCancel,
+                            MessageBoxIcon.Question);
+                        if (conf == DialogResult.Yes)
+                        {
+                            escolhido.dt_saida = DateTime.Now;
+                            ef.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "Check-in ainda não realizado!",
+                            "Atualizar Reserva",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                    }
+                    
+                }
+                CarregarGrid();
+            }
+        }
+
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            limparCampos();
+            tcReserva.SelectedTab = tpgReservas;
+        }
+
+        private void dgvQuartos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            btnEditar.PerformClick();
         }
     }
 }

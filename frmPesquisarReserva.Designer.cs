@@ -34,10 +34,11 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cbMostrarEncerradas = new System.Windows.Forms.CheckBox();
+            this.dgvReservas = new System.Windows.Forms.DataGridView();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReservas)).BeginInit();
             this.SuspendLayout();
             // 
             // lblPesquisarQuarto
@@ -53,7 +54,7 @@
             // 
             this.txtQuarto.Location = new System.Drawing.Point(12, 25);
             this.txtQuarto.Name = "txtQuarto";
-            this.txtQuarto.Size = new System.Drawing.Size(449, 20);
+            this.txtQuarto.Size = new System.Drawing.Size(325, 20);
             this.txtQuarto.TabIndex = 0;
             // 
             // panel2
@@ -74,9 +75,11 @@
             this.btnOk.TabIndex = 1;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnCancelar
             // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Location = new System.Drawing.Point(386, 3);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
@@ -87,34 +90,49 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cbMostrarEncerradas);
             this.panel1.Controls.Add(this.lblPesquisarQuarto);
             this.panel1.Controls.Add(this.txtQuarto);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(473, 57);
+            this.panel1.Size = new System.Drawing.Size(473, 53);
             this.panel1.TabIndex = 5;
             // 
-            // dataGridView1
+            // cbMostrarEncerradas
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(473, 450);
-            this.dataGridView1.TabIndex = 7;
+            this.cbMostrarEncerradas.AutoSize = true;
+            this.cbMostrarEncerradas.Location = new System.Drawing.Point(343, 27);
+            this.cbMostrarEncerradas.Name = "cbMostrarEncerradas";
+            this.cbMostrarEncerradas.Size = new System.Drawing.Size(118, 17);
+            this.cbMostrarEncerradas.TabIndex = 2;
+            this.cbMostrarEncerradas.Text = "Mostrar Encerradas";
+            this.cbMostrarEncerradas.UseVisualStyleBackColor = true;
+            this.cbMostrarEncerradas.CheckedChanged += new System.EventHandler(this.cbMostrarEncerradas_CheckedChanged);
+            // 
+            // dgvReservas
+            // 
+            this.dgvReservas.AllowUserToAddRows = false;
+            this.dgvReservas.AllowUserToDeleteRows = false;
+            this.dgvReservas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvReservas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReservas.Location = new System.Drawing.Point(0, 59);
+            this.dgvReservas.Name = "dgvReservas";
+            this.dgvReservas.ReadOnly = true;
+            this.dgvReservas.Size = new System.Drawing.Size(473, 355);
+            this.dgvReservas.TabIndex = 7;
+            this.dgvReservas.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvReservas_CellMouseDoubleClick);
             // 
             // frmPesquisarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(473, 450);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvReservas);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmPesquisarReserva";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -123,7 +141,7 @@
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReservas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -136,6 +154,7 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvReservas;
+        private System.Windows.Forms.CheckBox cbMostrarEncerradas;
     }
 }

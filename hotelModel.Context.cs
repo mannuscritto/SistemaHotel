@@ -31,5 +31,7 @@ namespace SistemaHotel
         public DbSet<fatura> fatura { get; set; }
         public DbSet<quarto> quarto { get; set; }
         public DbSet<reserva> reserva { get; set; }
+        public DbSet<vw_quartos> vw_quartos { get; set; }
+        public DbSet<vw_reservas> vw_reservas { get; set; }
     }
 }

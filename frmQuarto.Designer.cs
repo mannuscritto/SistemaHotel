@@ -101,6 +101,7 @@
             this.dgvQuartos.ReadOnly = true;
             this.dgvQuartos.Size = new System.Drawing.Size(786, 339);
             this.dgvQuartos.TabIndex = 1;
+            this.dgvQuartos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvQuartos_CellMouseDoubleClick);
             // 
             // panel4
             // 

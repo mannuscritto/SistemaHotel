@@ -13,6 +13,7 @@ namespace SistemaHotel
     public partial class frmCliente : Form
     {
         private char Operacao { get; set; }
+        private int escolhidoId { get; set; }
 
         public frmCliente()
         {
@@ -25,6 +26,7 @@ namespace SistemaHotel
             InitializeComponent();
             CarregarGrid();
             this.Operacao = 'e';
+            this.escolhidoId = _id;
             tcCliente.SelectedTab = tpgCriarCliente;
             preencherCampos(_id);
             txtPrimeiroNome.Focus();
@@ -63,7 +65,7 @@ namespace SistemaHotel
             }
             if (this.Operacao.Equals('e') && valido)
             {
-                int _id = Convert.ToInt32(dgvClientes.CurrentRow.Cells["id"].Value.ToString());
+                int _id = this.escolhidoId;
                 using (hotelEntities ef = new hotelEntities())
                 {
                     
@@ -180,8 +182,8 @@ namespace SistemaHotel
             if (dgvClientes.CurrentRow.Index != -1)
             {
                 this.Operacao = 'e';
-                int _id = Convert.ToInt32(dgvClientes.CurrentRow.Cells["id"].Value.ToString());
-                preencherCampos(_id);
+                this.escolhidoId = Convert.ToInt32(dgvClientes.CurrentRow.Cells["id"].Value.ToString());
+                preencherCampos(this.escolhidoId);
                 tcCliente.SelectedTab = tpgCriarCliente;
                 txtPrimeiroNome.Focus();
             }
@@ -221,6 +223,11 @@ namespace SistemaHotel
                     CarregarGrid();
                 }
             }
+        }
+
+        private void dgvClientes_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            btnEditar.PerformClick();
         }
     }
 }
