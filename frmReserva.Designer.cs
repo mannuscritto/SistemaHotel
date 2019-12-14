@@ -32,6 +32,8 @@
             this.tpgReservas = new System.Windows.Forms.TabPage();
             this.dgvQuartos = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnCheckout = new System.Windows.Forms.Button();
+            this.btnCheckin = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnNovo = new System.Windows.Forms.Button();
@@ -50,8 +52,7 @@
             this.btnSalvar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSair = new System.Windows.Forms.Button();
-            this.btnCheckin = new System.Windows.Forms.Button();
-            this.btnCheckout = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.tcReserva.SuspendLayout();
             this.tpgReservas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuartos)).BeginInit();
@@ -109,6 +110,26 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(786, 29);
             this.panel4.TabIndex = 4;
+            // 
+            // btnCheckout
+            // 
+            this.btnCheckout.Location = new System.Drawing.Point(706, 3);
+            this.btnCheckout.Name = "btnCheckout";
+            this.btnCheckout.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckout.TabIndex = 4;
+            this.btnCheckout.Text = "Check-out";
+            this.btnCheckout.UseVisualStyleBackColor = true;
+            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
+            // 
+            // btnCheckin
+            // 
+            this.btnCheckin.Location = new System.Drawing.Point(625, 3);
+            this.btnCheckin.Name = "btnCheckin";
+            this.btnCheckin.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckin.TabIndex = 3;
+            this.btnCheckin.Text = "Check-in";
+            this.btnCheckin.UseVisualStyleBackColor = true;
+            this.btnCheckin.Click += new System.EventHandler(this.btnCheckin_Click);
             // 
             // btnExcluir
             // 
@@ -253,6 +274,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnCancelar);
             this.panel2.Controls.Add(this.btnSalvar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(3, 255);
@@ -289,25 +311,15 @@
             this.btnSair.UseVisualStyleBackColor = true;
             this.btnSair.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // btnCheckin
+            // btnCancelar
             // 
-            this.btnCheckin.Location = new System.Drawing.Point(625, 3);
-            this.btnCheckin.Name = "btnCheckin";
-            this.btnCheckin.Size = new System.Drawing.Size(75, 23);
-            this.btnCheckin.TabIndex = 3;
-            this.btnCheckin.Text = "Check-in";
-            this.btnCheckin.UseVisualStyleBackColor = true;
-            this.btnCheckin.Click += new System.EventHandler(this.btnCheckin_Click);
-            // 
-            // btnCheckout
-            // 
-            this.btnCheckout.Location = new System.Drawing.Point(706, 3);
-            this.btnCheckout.Name = "btnCheckout";
-            this.btnCheckout.Size = new System.Drawing.Size(75, 23);
-            this.btnCheckout.TabIndex = 4;
-            this.btnCheckout.Text = "Check-out";
-            this.btnCheckout.UseVisualStyleBackColor = true;
-            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
+            this.btnCancelar.Location = new System.Drawing.Point(86, 3);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 7;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
             // 
             // frmReserva
             // 
@@ -358,5 +370,6 @@
         private System.Windows.Forms.MaskedTextBox txtDtInicio;
         private System.Windows.Forms.Button btnCheckout;
         private System.Windows.Forms.Button btnCheckin;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }

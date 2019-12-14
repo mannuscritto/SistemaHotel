@@ -15,6 +15,7 @@ namespace SistemaHotel
         private char Operacao { get; set; }
         private cliente temp_cliente = null;
         private quarto temp_quarto = null;
+        private int escolhidoId { get; set; }
 
         public frmReserva()
         {
@@ -90,7 +91,9 @@ namespace SistemaHotel
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             reserva r;
-            bool valido = checarCampos(out r);
+            bool valido;
+            valido = checarCampos(out r);
+            valido = checarDatas(r);
 
             if (valido && this.Operacao == 'n')
             {
@@ -105,7 +108,7 @@ namespace SistemaHotel
             }
             if (valido && this.Operacao == 'e')
             {
-                int _id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["ID"].Value.ToString());
+                int _id = this.escolhidoId;
                 using (hotelEntities ef = new hotelEntities())
                 {
                     reserva novo = ef.reserva.Find(_id);
@@ -123,6 +126,20 @@ namespace SistemaHotel
                 tcReserva.SelectedTab = tpgReservas;
                 CarregarGrid();
             }
+        }
+
+        private bool checarDatas(reserva r)
+        {
+            using (hotelEntities ef = new hotelEntities())
+            {
+                var listaReservas = ef.vw_reservas
+                    .Where(vr => vr.fk_quarto == r.fk_quarto
+                        && DateTime.Compare(vr.dt_inicio, r.dt_inicio) > 0
+                        && DateTime.Compare(vr.dt_termino, r.dt_termino) < 0)
+                    .ToList();
+                Console.WriteLine("Reservas em conflito: {0}", listaReservas.Count);
+            }
+            return true;
         }
 
         private void limparCampos()
@@ -193,6 +210,7 @@ namespace SistemaHotel
 
         private void preencherCampos(int _id)
         {
+            this.escolhidoId = _id;
             using (hotelEntities ef = new hotelEntities())
             {
                 reserva r = ef.reserva.Find(_id);
@@ -284,6 +302,12 @@ namespace SistemaHotel
                 }
                 CarregarGrid();
             }
+        }
+
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            limparCampos();
+            tcReserva.SelectedTab = tpgReservas;
         }
     }
 }
