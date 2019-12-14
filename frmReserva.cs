@@ -22,6 +22,15 @@ namespace SistemaHotel
             CarregarGrid();
         }
 
+        public frmReserva(int _id)
+        {
+            InitializeComponent();
+            CarregarGrid();
+            this.Operacao = 'e';
+            preencherCampos(_id);
+            tcReserva.SelectedTab = tpgCriarReserva;
+        }
+
         private void CarregarGrid()
         {
             using (hotelEntities ef = new hotelEntities())
