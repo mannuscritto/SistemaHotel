@@ -105,7 +105,7 @@ namespace SistemaHotel
             }
             if (valido && this.Operacao == 'e')
             {
-                int _id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value.ToString());
+                int _id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["ID"].Value.ToString());
                 using (hotelEntities ef = new hotelEntities())
                 {
                     reserva novo = ef.reserva.Find(_id);
