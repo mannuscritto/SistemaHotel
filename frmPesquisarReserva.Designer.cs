@@ -34,8 +34,8 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dgvReservas = new System.Windows.Forms.DataGridView();
             this.cbMostrarEncerradas = new System.Windows.Forms.CheckBox();
+            this.dgvReservas = new System.Windows.Forms.DataGridView();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReservas)).BeginInit();
@@ -99,6 +99,17 @@
             this.panel1.Size = new System.Drawing.Size(473, 53);
             this.panel1.TabIndex = 5;
             // 
+            // cbMostrarEncerradas
+            // 
+            this.cbMostrarEncerradas.AutoSize = true;
+            this.cbMostrarEncerradas.Location = new System.Drawing.Point(343, 27);
+            this.cbMostrarEncerradas.Name = "cbMostrarEncerradas";
+            this.cbMostrarEncerradas.Size = new System.Drawing.Size(118, 17);
+            this.cbMostrarEncerradas.TabIndex = 2;
+            this.cbMostrarEncerradas.Text = "Mostrar Encerradas";
+            this.cbMostrarEncerradas.UseVisualStyleBackColor = true;
+            this.cbMostrarEncerradas.CheckedChanged += new System.EventHandler(this.cbMostrarEncerradas_CheckedChanged);
+            // 
             // dgvReservas
             // 
             this.dgvReservas.AllowUserToAddRows = false;
@@ -110,17 +121,7 @@
             this.dgvReservas.ReadOnly = true;
             this.dgvReservas.Size = new System.Drawing.Size(473, 355);
             this.dgvReservas.TabIndex = 7;
-            // 
-            // cbMostrarEncerradas
-            // 
-            this.cbMostrarEncerradas.AutoSize = true;
-            this.cbMostrarEncerradas.Location = new System.Drawing.Point(343, 27);
-            this.cbMostrarEncerradas.Name = "cbMostrarEncerradas";
-            this.cbMostrarEncerradas.Size = new System.Drawing.Size(118, 17);
-            this.cbMostrarEncerradas.TabIndex = 2;
-            this.cbMostrarEncerradas.Text = "Mostrar Encerradas";
-            this.cbMostrarEncerradas.UseVisualStyleBackColor = true;
-            this.cbMostrarEncerradas.CheckedChanged += new System.EventHandler(this.cbMostrarEncerradas_CheckedChanged);
+            this.dgvReservas.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvReservas_CellMouseDoubleClick);
             // 
             // frmPesquisarReserva
             // 

@@ -66,5 +66,10 @@ namespace SistemaHotel
         {
             CarregarGrid();
         }
+
+        private void dgvReservas_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            btnOk.PerformClick();
+        }
     }
 }
