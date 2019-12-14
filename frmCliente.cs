@@ -224,5 +224,10 @@ namespace SistemaHotel
                 }
             }
         }
+
+        private void dgvClientes_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            btnEditar.PerformClick();
+        }
     }
 }

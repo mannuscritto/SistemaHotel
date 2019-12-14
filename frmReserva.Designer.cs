@@ -49,10 +49,10 @@
             this.txtQuarto = new System.Windows.Forms.TextBox();
             this.txtCliente = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSair = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.tcReserva.SuspendLayout();
             this.tpgReservas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuartos)).BeginInit();
@@ -97,6 +97,7 @@
             this.dgvQuartos.ReadOnly = true;
             this.dgvQuartos.Size = new System.Drawing.Size(786, 339);
             this.dgvQuartos.TabIndex = 5;
+            this.dgvQuartos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvQuartos_CellMouseDoubleClick);
             // 
             // panel4
             // 
@@ -282,6 +283,16 @@
             this.panel2.Size = new System.Drawing.Size(786, 116);
             this.panel2.TabIndex = 3;
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(86, 3);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 7;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
+            // 
             // btnSalvar
             // 
             this.btnSalvar.Location = new System.Drawing.Point(5, 3);
@@ -310,16 +321,6 @@
             this.btnSair.Text = "Sair";
             this.btnSair.UseVisualStyleBackColor = true;
             this.btnSair.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(86, 3);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 7;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
             // 
             // frmReserva
             // 

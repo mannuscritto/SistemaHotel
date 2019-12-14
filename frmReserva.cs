@@ -309,5 +309,10 @@ namespace SistemaHotel
             limparCampos();
             tcReserva.SelectedTab = tpgReservas;
         }
+
+        private void dgvQuartos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            btnEditar.PerformClick();
+        }
     }
 }

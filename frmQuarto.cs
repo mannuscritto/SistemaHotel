@@ -273,5 +273,10 @@ namespace SistemaHotel
             limparCampos();
             tcQuarto.SelectedTab = tpgQuartos;
         }
+
+        private void dgvQuartos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            btnEditar.PerformClick();
+        }
     }
 }
