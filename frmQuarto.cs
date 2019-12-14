@@ -10,6 +10,7 @@ namespace SistemaHotel
     public partial class frmQuarto : Form
     {
         private char Operacao { get; set; }
+        private int escolhidoId { get; set; }
 
         public frmQuarto()
         {
@@ -23,6 +24,7 @@ namespace SistemaHotel
             CarregarGrid();
             this.Operacao = 'e';
             preencherCampos(_id);
+            this.escolhidoId = _id;
             tcQuarto.SelectedTab = tpgCriarQuartos;
         }
 
@@ -91,7 +93,7 @@ namespace SistemaHotel
                 {
                     using (hotelEntities ef = new hotelEntities())
                     {
-                        int id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value);
+                        int id = this.escolhidoId;
                         quarto novo = ef.quarto.Find(id);
                         novo.numero = q.numero;
                         novo.andar = q.andar;
@@ -231,9 +233,8 @@ namespace SistemaHotel
             if (dgvQuartos.CurrentRow.Index != -1)
             {
                 this.Operacao = 'e';
-                int id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value.ToString());
-
-                preencherCampos(id);
+                this.escolhidoId = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value.ToString());
+                preencherCampos(this.escolhidoId);
                 tcQuarto.SelectedTab = tpgCriarQuartos;
                 txtNumero.Focus();
             }
