@@ -30,19 +30,19 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenuPrincipal));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quartoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reservaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pesquisarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quartoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.clienteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.reservaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.lblUltimasReservas = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pesquisarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clienteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.reservaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quartoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -56,6 +56,19 @@
             this.pesquisarToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
+            // 
+            // arquivoToolStripMenuItem
+            // 
+            this.arquivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sairToolStripMenuItem});
+            this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
+            resources.ApplyResources(this.arquivoToolStripMenuItem, "arquivoToolStripMenuItem");
+            // 
+            // sairToolStripMenuItem
+            // 
+            this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
+            resources.ApplyResources(this.sairToolStripMenuItem, "sairToolStripMenuItem");
+            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
             // cadastrarToolStripMenuItem
             // 
@@ -84,6 +97,33 @@
             resources.ApplyResources(this.reservaToolStripMenuItem, "reservaToolStripMenuItem");
             this.reservaToolStripMenuItem.Click += new System.EventHandler(this.reservaToolStripMenuItem_Click);
             // 
+            // pesquisarToolStripMenuItem
+            // 
+            this.pesquisarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.quartoToolStripMenuItem1,
+            this.clienteToolStripMenuItem1,
+            this.reservaToolStripMenuItem1});
+            this.pesquisarToolStripMenuItem.Name = "pesquisarToolStripMenuItem";
+            resources.ApplyResources(this.pesquisarToolStripMenuItem, "pesquisarToolStripMenuItem");
+            // 
+            // quartoToolStripMenuItem1
+            // 
+            this.quartoToolStripMenuItem1.Name = "quartoToolStripMenuItem1";
+            resources.ApplyResources(this.quartoToolStripMenuItem1, "quartoToolStripMenuItem1");
+            this.quartoToolStripMenuItem1.Click += new System.EventHandler(this.quartoToolStripMenuItem1_Click);
+            // 
+            // clienteToolStripMenuItem1
+            // 
+            this.clienteToolStripMenuItem1.Name = "clienteToolStripMenuItem1";
+            resources.ApplyResources(this.clienteToolStripMenuItem1, "clienteToolStripMenuItem1");
+            this.clienteToolStripMenuItem1.Click += new System.EventHandler(this.clienteToolStripMenuItem1_Click);
+            // 
+            // reservaToolStripMenuItem1
+            // 
+            this.reservaToolStripMenuItem1.Name = "reservaToolStripMenuItem1";
+            resources.ApplyResources(this.reservaToolStripMenuItem1, "reservaToolStripMenuItem1");
+            this.reservaToolStripMenuItem1.Click += new System.EventHandler(this.reservaToolStripMenuItem1_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -105,46 +145,6 @@
             this.panel1.Controls.Add(this.lblUltimasReservas);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
-            // 
-            // pesquisarToolStripMenuItem
-            // 
-            this.pesquisarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.quartoToolStripMenuItem1,
-            this.clienteToolStripMenuItem1,
-            this.reservaToolStripMenuItem1});
-            this.pesquisarToolStripMenuItem.Name = "pesquisarToolStripMenuItem";
-            resources.ApplyResources(this.pesquisarToolStripMenuItem, "pesquisarToolStripMenuItem");
-            // 
-            // clienteToolStripMenuItem1
-            // 
-            this.clienteToolStripMenuItem1.Name = "clienteToolStripMenuItem1";
-            resources.ApplyResources(this.clienteToolStripMenuItem1, "clienteToolStripMenuItem1");
-            this.clienteToolStripMenuItem1.Click += new System.EventHandler(this.clienteToolStripMenuItem1_Click);
-            // 
-            // reservaToolStripMenuItem1
-            // 
-            this.reservaToolStripMenuItem1.Name = "reservaToolStripMenuItem1";
-            resources.ApplyResources(this.reservaToolStripMenuItem1, "reservaToolStripMenuItem1");
-            this.reservaToolStripMenuItem1.Click += new System.EventHandler(this.reservaToolStripMenuItem1_Click);
-            // 
-            // arquivoToolStripMenuItem
-            // 
-            this.arquivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sairToolStripMenuItem});
-            this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
-            resources.ApplyResources(this.arquivoToolStripMenuItem, "arquivoToolStripMenuItem");
-            // 
-            // sairToolStripMenuItem
-            // 
-            this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            resources.ApplyResources(this.sairToolStripMenuItem, "sairToolStripMenuItem");
-            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
-            // 
-            // quartoToolStripMenuItem1
-            // 
-            this.quartoToolStripMenuItem1.Name = "quartoToolStripMenuItem1";
-            resources.ApplyResources(this.quartoToolStripMenuItem1, "quartoToolStripMenuItem1");
-            this.quartoToolStripMenuItem1.Click += new System.EventHandler(this.quartoToolStripMenuItem1_Click);
             // 
             // frmMenuPrincipal
             // 

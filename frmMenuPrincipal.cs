@@ -49,15 +49,19 @@ namespace SistemaHotel
         {
             using (frmPesquisarQuarto pesquisa = new frmPesquisarQuarto())
             {
-                DialogResult res = pesquisa.ShowDialog();
-                if (res == DialogResult.OK)
+                if (pesquisa.ShowDialog() == DialogResult.OK)
                 {
-                    frmQuarto quarto = new frmQuarto(pesquisa.escolhido.id);
-                    quarto.Show();
-                }
-                else if (res == DialogResult.Yes)
-                {
-                    frmReserva reserva = new frmReserva();
+                    //List<reserva> reservas = pesquisa.escolhido.reserva.ToList();
+                    if (pesquisa.escolhido.reserva.ToList().Count > 0)
+                    {
+                        frmReserva reserva = new frmReserva(pesquisa.escolhido.reserva.ElementAt(0).id);
+                        reserva.Show();
+                    }
+                    else
+                    {
+                        frmQuarto quarto = new frmQuarto(pesquisa.escolhido.id);
+                        quarto.Show();
+                    }
                 }
             }
         }

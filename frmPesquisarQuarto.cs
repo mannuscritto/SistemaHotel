@@ -69,22 +69,36 @@ namespace SistemaHotel
                 
                 using (hotelEntities ef = new hotelEntities())
                 {
+                    this.escolhido = ef.quarto.Find(escolhido_id);
+
                     if (ef.vw_reservas.ToList().Exists(r => r.fk_quarto == escolhido_id))
                     {
-                        MessageBox.Show(
-                            "Este quarto já está reservado!",
+                        DialogResult res = MessageBox.Show(
+                            "Este quarto já está reservado.\nDeseja ver esta reserva?",
                             "Pesquisar Quarto",
-                            MessageBoxButtons.OK,
+                            MessageBoxButtons.YesNo,
                             MessageBoxIcon.Error);
-                        return;
-                    }
-                    else
-                    {
-                        this.escolhido = ef.quarto.Find(escolhido_id);
-                    }
-                }
 
-                this.DialogResult = DialogResult.OK;
+                        if (res == DialogResult.Yes)
+                        {
+                            List<reserva> reservas = ef.reserva
+                                .Where(r => r.fk_quarto == this.escolhido.id
+                                    && r.dt_saida == null)
+                                .ToList();
+
+                            foreach (reserva r in reservas)
+                            {
+                                this.escolhido.reserva.Add(r);
+                            }
+                        }
+                        else
+                        {
+                            this.escolhido.reserva = new List<reserva>();
+                            this.escolhido.reserva.Clear();
+                        }
+                    }
+                    this.DialogResult = DialogResult.OK;
+                }
             }
             else
             {
