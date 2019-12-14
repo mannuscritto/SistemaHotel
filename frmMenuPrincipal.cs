@@ -80,7 +80,7 @@ namespace SistemaHotel
             {
                 if (pesquisa.ShowDialog() == DialogResult.OK)
                 {
-                    frmPesquisarReserva reserva = new frmPesquisarReserva();
+                    frmReserva reserva = new frmReserva(pesquisa.escolhido.id);
                     reserva.Show();
                 }
             }
