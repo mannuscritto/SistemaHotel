@@ -179,13 +179,21 @@ namespace SistemaHotel
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (dgvClientes.CurrentRow.Index != -1)
+            if (dgvClientes.CurrentRow != null)
             {
                 this.Operacao = 'e';
                 this.escolhidoId = Convert.ToInt32(dgvClientes.CurrentRow.Cells["id"].Value.ToString());
                 preencherCampos(this.escolhidoId);
                 tcCliente.SelectedTab = tpgCriarCliente;
                 txtPrimeiroNome.Focus();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Nenhum cliente selecionado!",
+                    "Editar cliente",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -204,7 +212,7 @@ namespace SistemaHotel
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if (dgvClientes.CurrentRow.Index != -1)
+            if (dgvClientes.CurrentRow != null)
             {
                 DialogResult opcao = MessageBox.Show(
                     "Tem certeza que deseja excluir esse cliente?",
@@ -222,6 +230,14 @@ namespace SistemaHotel
                     }
                     CarregarGrid();
                 }
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Nenhum cliente selecionado!",
+                    "Excluir quarto",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
