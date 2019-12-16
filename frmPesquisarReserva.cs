@@ -58,7 +58,7 @@ namespace SistemaHotel
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (dgvReservas.CurrentRow.Index != -1)
+            if (dgvReservas.CurrentRow != null)
             {
                 int _id = Convert.ToInt32(dgvReservas.CurrentRow.Cells["ID"].Value.ToString());
                 using (hotelEntities ef = new hotelEntities())
@@ -66,6 +66,14 @@ namespace SistemaHotel
                     this.escolhido = ef.reserva.Find(_id);
                 }
                 this.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Nenhuma reserva foi selecionada!",
+                    "Pesquisar Reserva",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 

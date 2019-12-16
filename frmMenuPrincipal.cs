@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Objects;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,26 @@ namespace SistemaHotel
         public frmMenuPrincipal()
         {
             InitializeComponent();
+            CarregarGrid();
+        }
+
+        private void CarregarGrid()
+        {
+            using (hotelEntities ef = new hotelEntities())
+            {
+                var listaReservas = ef.reserva
+                    .Where(r => r.ativo == true
+                        && r.dt_entrada == null
+                        || r.dt_saida == null)
+                    .Select(r => new
+                    {
+                        Cliente = r.cliente.ultimo_nome,
+                        Quarto = r.quarto.numero,
+                        Dias = EntityFunctions.DiffDays(r.dt_inicio, r.dt_termino)
+                    })
+                    .Take(10).ToList();
+                dgvUltimasReservas.DataSource = listaReservas;
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -88,6 +109,11 @@ namespace SistemaHotel
                     reserva.Show();
                 }
             }
+        }
+
+        private void frmMenuPrincipal_MouseEnter(object sender, EventArgs e)
+        {
+            CarregarGrid();
         }
     }
 }
