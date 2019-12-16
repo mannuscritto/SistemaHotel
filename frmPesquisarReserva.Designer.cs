@@ -56,6 +56,7 @@
             this.txtQuarto.Name = "txtQuarto";
             this.txtQuarto.Size = new System.Drawing.Size(325, 20);
             this.txtQuarto.TabIndex = 0;
+            this.txtQuarto.TextChanged += new System.EventHandler(this.txtQuarto_TextChanged);
             // 
             // panel2
             // 
