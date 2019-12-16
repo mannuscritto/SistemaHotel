@@ -70,6 +70,7 @@ namespace SistemaHotel
         {
             using (frmPesquisarQuarto pesquisa = new frmPesquisarQuarto())
             {
+                pesquisa.msg = "Este quarto já está ocupado!";
                 if (pesquisa.ShowDialog() == DialogResult.OK)
                 {
                     this.temp_quarto = pesquisa.escolhido;
@@ -141,7 +142,8 @@ namespace SistemaHotel
                         && DateTime.Compare(e.dt_inicio, n.dt_termino) <= 0
                         && DateTime.Compare(e.dt_termino, n.dt_inicio) >= 0)
                     .ToList();
-                if (listaReservas.Count > 0)
+                int max = this.Operacao == 'n' ? 0 : 1;
+                if (listaReservas.Count > max)
                 {
                     MessageBox.Show(
                         "Há reservas em conflito!",
