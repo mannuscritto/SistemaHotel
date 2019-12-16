@@ -19,7 +19,7 @@ namespace SistemaHotel
             CarregarGrid();
         }
 
-        private void CarregarGrid()
+        private void CarregarGrid(string termos = "")
         {
             using (hotelEntities ef = new hotelEntities())
             {
@@ -40,7 +40,14 @@ namespace SistemaHotel
                         .Where(r => !r.Status.Equals("Encerrada"));
                 }
                 listaReservas = listaReservas.OrderBy(r => r.Inicio);
-                    dgvReservas.DataSource = listaReservas.ToList();
+                var listaReservasList = listaReservas.ToList();
+                if (!termos.Equals(""))
+                {
+                    listaReservasList = listaReservasList.FindAll(r =>
+                        r.Cliente.ToUpper().StartsWith(termos.ToUpper())
+                        || r.Quarto.ToString().StartsWith(termos));
+                }
+                dgvReservas.DataSource = listaReservasList;
             }
         }
 
@@ -64,12 +71,19 @@ namespace SistemaHotel
 
         private void cbMostrarEncerradas_CheckedChanged(object sender, EventArgs e)
         {
-            CarregarGrid();
+            string termos = txtQuarto.Text;
+            CarregarGrid(termos);
         }
 
         private void dgvReservas_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             btnOk.PerformClick();
+        }
+
+        private void txtQuarto_TextChanged(object sender, EventArgs e)
+        {
+            string termos = txtQuarto.Text;
+            CarregarGrid(termos);
         }
     }
 }
