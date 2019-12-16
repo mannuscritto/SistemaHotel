@@ -25,8 +25,7 @@ namespace SistemaHotel
             {
                 var listaReservas = ef.reserva
                     .Where(r => r.ativo == true
-                        && r.dt_entrada == null
-                        || r.dt_saida == null)
+                        && !(r.dt_entrada != null && r.dt_saida != null))
                     .Select(r => new
                     {
                         Cliente = r.cliente.ultimo_nome,
