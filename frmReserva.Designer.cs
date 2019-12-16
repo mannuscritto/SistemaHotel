@@ -38,8 +38,6 @@
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnNovo = new System.Windows.Forms.Button();
             this.tpgCriarReserva = new System.Windows.Forms.TabPage();
-            this.txtDtTermino = new System.Windows.Forms.MaskedTextBox();
-            this.txtDtInicio = new System.Windows.Forms.MaskedTextBox();
             this.btnPesquisarQuarto = new System.Windows.Forms.Button();
             this.btnPesquisarCliente = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,6 +51,8 @@
             this.btnSalvar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSair = new System.Windows.Forms.Button();
+            this.txtDtInicio = new System.Windows.Forms.DateTimePicker();
+            this.txtDtTermino = new System.Windows.Forms.DateTimePicker();
             this.tcReserva.SuspendLayout();
             this.tpgReservas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuartos)).BeginInit();
@@ -184,24 +184,6 @@
             this.tpgCriarReserva.Text = "Novo";
             this.tpgCriarReserva.UseVisualStyleBackColor = true;
             // 
-            // txtDtTermino
-            // 
-            this.txtDtTermino.Location = new System.Drawing.Point(103, 87);
-            this.txtDtTermino.Mask = "00/00/0000";
-            this.txtDtTermino.Name = "txtDtTermino";
-            this.txtDtTermino.Size = new System.Drawing.Size(174, 20);
-            this.txtDtTermino.TabIndex = 15;
-            this.txtDtTermino.ValidatingType = typeof(System.DateTime);
-            // 
-            // txtDtInicio
-            // 
-            this.txtDtInicio.Location = new System.Drawing.Point(103, 58);
-            this.txtDtInicio.Mask = "00/00/0000";
-            this.txtDtInicio.Name = "txtDtInicio";
-            this.txtDtInicio.Size = new System.Drawing.Size(174, 20);
-            this.txtDtInicio.TabIndex = 14;
-            this.txtDtInicio.ValidatingType = typeof(System.DateTime);
-            // 
             // btnPesquisarQuarto
             // 
             this.btnPesquisarQuarto.Location = new System.Drawing.Point(509, 32);
@@ -225,7 +207,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 61);
+            this.label4.Location = new System.Drawing.Point(8, 64);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 11;
@@ -252,7 +234,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 87);
+            this.label1.Location = new System.Drawing.Point(8, 90);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 13);
             this.label1.TabIndex = 8;
@@ -323,6 +305,24 @@
             this.btnSair.UseVisualStyleBackColor = true;
             this.btnSair.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // txtDtInicio
+            // 
+            this.txtDtInicio.CustomFormat = "dd/MM/yyyy";
+            this.txtDtInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtDtInicio.Location = new System.Drawing.Point(103, 58);
+            this.txtDtInicio.Name = "txtDtInicio";
+            this.txtDtInicio.Size = new System.Drawing.Size(200, 20);
+            this.txtDtInicio.TabIndex = 16;
+            // 
+            // txtDtTermino
+            // 
+            this.txtDtTermino.CustomFormat = "dd/MM/yyyy";
+            this.txtDtTermino.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtDtTermino.Location = new System.Drawing.Point(103, 84);
+            this.txtDtTermino.Name = "txtDtTermino";
+            this.txtDtTermino.Size = new System.Drawing.Size(200, 20);
+            this.txtDtTermino.TabIndex = 17;
+            // 
             // frmReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -368,10 +368,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.MaskedTextBox txtDtTermino;
-        private System.Windows.Forms.MaskedTextBox txtDtInicio;
         private System.Windows.Forms.Button btnCheckout;
         private System.Windows.Forms.Button btnCheckin;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.DateTimePicker txtDtInicio;
+        private System.Windows.Forms.DateTimePicker txtDtTermino;
     }
 }
