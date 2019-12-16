@@ -306,7 +306,7 @@ namespace SistemaHotel
             {
                 MessageBox.Show(
                     "Nenhum quarto selecionado!",
-                    "Editar quarto",
+                    "Excluir quarto",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
