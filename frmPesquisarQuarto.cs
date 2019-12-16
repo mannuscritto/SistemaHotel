@@ -13,6 +13,7 @@ namespace SistemaHotel
     public partial class frmPesquisarQuarto : Form
     {
         public quarto escolhido { get; set; }
+        public string msg { get; set; }
 
         public frmPesquisarQuarto()
         {
@@ -73,11 +74,15 @@ namespace SistemaHotel
 
                     if (ef.vw_reservas.ToList().Exists(r => r.fk_quarto == escolhido_id))
                     {
+                        if (msg == null)
+                        {
+                            msg = "Este quarto está ocupado.\nDeseja ver a reserva associada?";
+                        }
                         DialogResult res = MessageBox.Show(
-                            "Este quarto já está reservado.\nDeseja ver esta reserva?",
+                            msg,
                             "Pesquisar Quarto",
                             MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Error);
+                            MessageBoxIcon.Warning);
 
                         if (res == DialogResult.Yes)
                         {
@@ -96,6 +101,11 @@ namespace SistemaHotel
                             this.escolhido.reserva = new List<reserva>();
                             this.escolhido.reserva.Clear();
                         }
+                    }
+                    else
+                    {
+                        this.escolhido.reserva = new List<reserva>();
+                        this.escolhido.reserva.Clear();
                     }
                     this.DialogResult = DialogResult.OK;
                 }
