@@ -37,6 +37,12 @@ namespace SistemaHotel
                             Preco = q.preco
                         })
                     .ToList();
+                    if (!termos.Equals(""))
+                    {
+                        listaQuartos = listaQuartos.FindAll(q => q.Numero.ToString().StartsWith(termos)
+                            || q.Preco.ToString().StartsWith(termos)
+                            || q.Andar.ToString().StartsWith(termos));
+                    }
                     dgvQuartos.DataSource = listaQuartos;
                 }
                 else
@@ -51,6 +57,12 @@ namespace SistemaHotel
                        Preco = q.preco
                    })
                    .ToList();
+                    if (!termos.Equals(""))
+                    {
+                        listaQuartos = listaQuartos.FindAll(q => q.Numero.ToString().StartsWith(termos)
+                            || q.Preco.ToString().StartsWith(termos)
+                            || q.Andar.ToString().StartsWith(termos));
+                    }
                     dgvQuartos.DataSource = listaQuartos;
                 }
                 
@@ -133,7 +145,8 @@ namespace SistemaHotel
 
         private void cbDisponiveis_CheckedChanged(object sender, EventArgs e)
         {
-            CarregarGrid();
+            string termos = txtTermo.Text;
+            CarregarGrid(termos);
         }
     }
 }
