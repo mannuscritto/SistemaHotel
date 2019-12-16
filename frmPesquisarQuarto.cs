@@ -76,7 +76,7 @@ namespace SistemaHotel
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (dgvQuartos.CurrentRow.Index != -1)
+            if (dgvQuartos.CurrentRow != null)
             {
                 int escolhido_id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value);
                 

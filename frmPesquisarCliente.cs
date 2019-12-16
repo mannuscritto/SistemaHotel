@@ -62,7 +62,7 @@ namespace SistemaHotel
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (dgvClientes.CurrentRow.Index != -1)
+            if (dgvClientes.CurrentRow != null)
             {
                 int escolhido_id = Convert.ToInt32(dgvClientes.CurrentRow.Cells["id"].Value.ToString());
                 using (hotelEntities ef = new hotelEntities())
