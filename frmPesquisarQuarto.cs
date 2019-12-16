@@ -14,6 +14,7 @@ namespace SistemaHotel
     {
         public quarto escolhido { get; set; }
         public string msg { get; set; }
+        private MessageBoxButtons botoes { get; set; }
 
         public frmPesquisarQuarto()
         {
@@ -88,12 +89,17 @@ namespace SistemaHotel
                     {
                         if (msg == null)
                         {
+                            botoes = MessageBoxButtons.YesNo;
                             msg = "Este quarto está ocupado.\nDeseja ver a reserva associada?";
+                        }
+                        else
+                        {
+                            botoes = MessageBoxButtons.OK;
                         }
                         DialogResult res = MessageBox.Show(
                             msg,
                             "Pesquisar Quarto",
-                            MessageBoxButtons.YesNo,
+                            botoes,
                             MessageBoxIcon.Warning);
 
                         if (res == DialogResult.Yes)
