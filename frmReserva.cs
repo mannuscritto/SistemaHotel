@@ -161,8 +161,8 @@ namespace SistemaHotel
             this.temp_cliente = null;
             txtQuarto.Text = "";
             this.temp_quarto = null;
-            txtDtInicio.Text = "";
-            txtDtTermino.Text = "";
+            txtDtInicio.Value = DateTime.Now;
+            txtDtTermino.Value = DateTime.Now;
         }
 
         private bool checarCampos(out reserva r)
@@ -178,11 +178,11 @@ namespace SistemaHotel
             {
                 mensagem += "Quarto";
             }
-            if (!DateTime.TryParse(txtDtInicio.Text, out dt_inicio))
+            if (!DateTime.TryParse(txtDtInicio.Value.ToString(), out dt_inicio))
             {
                 mensagem += "Data de Início\n";
             }
-            if (!DateTime.TryParse(txtDtTermino.Text, out dt_termino))
+            if (!DateTime.TryParse(txtDtTermino.Value.ToString(), out dt_termino))
             {
                 mensagem += "Data de Término\n";
             }
@@ -231,8 +231,8 @@ namespace SistemaHotel
                 this.temp_cliente = r.cliente;
                 txtQuarto.Text = r.quarto.numero.ToString();
                 this.temp_quarto = r.quarto;
-                txtDtInicio.Text = r.dt_inicio.ToString();
-                txtDtTermino.Text = r.dt_termino.ToString();
+                txtDtInicio.Value = r.dt_inicio;
+                txtDtTermino.Value = r.dt_termino;
             }
         }
 
