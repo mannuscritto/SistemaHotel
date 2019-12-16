@@ -263,7 +263,7 @@ namespace SistemaHotel
         private void btnEditar_Click(object sender, EventArgs e)
         {
             
-            if (dgvQuartos.CurrentRow.Index != -1)
+            if (dgvQuartos.CurrentRow != null)
             {
                 this.Operacao = 'e';
                 this.escolhidoId = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value.ToString());
@@ -271,11 +271,19 @@ namespace SistemaHotel
                 tcQuarto.SelectedTab = tpgCriarQuartos;
                 txtNumero.Focus();
             }
+            else
+            {
+                MessageBox.Show(
+                    "Nenhum quarto selecionado!",
+                    "Editar quarto",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if (dgvQuartos.CurrentRow.Index != -1)
+            if (dgvQuartos.CurrentRow != null)
             {
                 DialogResult opcao = MessageBox.Show(
                     "Tem certeza que deseja excluir esse quarto?",
@@ -293,6 +301,14 @@ namespace SistemaHotel
                     }
                     CarregarGrid();
                 }
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Nenhum quarto selecionado!",
+                    "Editar quarto",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
