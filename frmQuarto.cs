@@ -149,6 +149,14 @@ namespace SistemaHotel
                 {
                     mensagem += "Número\n";
                 }
+                else if (numero < 0)
+                {
+                    numero *= -1;
+                }
+            }
+            else
+            {
+                mensagem += "Número\n";
             }
             if (!txtAndar.Text.Equals(""))
             {
@@ -156,6 +164,14 @@ namespace SistemaHotel
                 {
                     mensagem += "Andar\n";
                 }
+                else if (andar < 0)
+                {
+                    andar *= -1;
+                }
+            }
+            else
+            {
+                mensagem += "Andar\n";
             }
             if (!txtCamas.Text.Equals(""))
             {
@@ -163,13 +179,30 @@ namespace SistemaHotel
                 {
                     mensagem += "Número de Camas\n";
                 }
+                else if (camas < 0)
+                {
+                    camas *= -1;
+                }
+            }
+            else
+            {
+                mensagem += "Número de Camas\n";
             }
             if (!txtPreco.Text.Equals(""))
             {
                 if (!decimal.TryParse(txtPreco.Text, out preco))
                 {
                     mensagem += "Preço\n";
+                } 
+                else if (preco < 0)
+                {
+                    preco *= -1;
                 }
+                
+            }
+            else
+            {
+                mensagem += "Preço\n";
             }
             if (cbTipo.SelectedIndex != -1)
             {

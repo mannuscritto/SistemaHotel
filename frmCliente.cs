@@ -118,7 +118,7 @@ namespace SistemaHotel
             {
                 ultimoNome = txtUltimoNome.Text;
             }
-            if (txtRG.Text.Equals(""))
+            if (txtRG.Text.Length < 12)
             {
                 mensagem += "RG\n";
             }
@@ -126,7 +126,7 @@ namespace SistemaHotel
             {
                 DocRg = txtRG.Text;
             }
-            if (txtCPF.Text.Equals(""))
+            if (txtCPF.Text.Length < 14)
             {
                 mensagem += "CPF\n";
             }
