@@ -95,8 +95,10 @@ namespace SistemaHotel
             reserva r;
             bool valido;
             valido = checarCampos(out r);
-            valido = checarDatas(r);
-
+            if (valido)
+            {
+                valido = checarDatas(r);
+            }
             if (valido && this.Operacao == 'n')
             {
                 using (hotelEntities ef = new hotelEntities())
@@ -176,7 +178,7 @@ namespace SistemaHotel
             }
             if (txtQuarto.Text.Equals("") || this.temp_quarto == null)
             {
-                mensagem += "Quarto";
+                mensagem += "Quarto\n";
             }
             if (!DateTime.TryParse(txtDtInicio.Value.ToString(), out dt_inicio))
             {
@@ -185,6 +187,10 @@ namespace SistemaHotel
             if (!DateTime.TryParse(txtDtTermino.Value.ToString(), out dt_termino))
             {
                 mensagem += "Data de Término\n";
+            }
+            if (dt_inicio.CompareTo(dt_termino) > 0)
+            {
+                mensagem += "Data de término anterior a data de início\n";
             }
 
             if (!mensagem.Equals(""))
