@@ -55,6 +55,7 @@
             this.txtTermo.Name = "txtTermo";
             this.txtTermo.Size = new System.Drawing.Size(449, 20);
             this.txtTermo.TabIndex = 0;
+            this.txtTermo.TextChanged += new System.EventHandler(this.txtTermo_TextChanged);
             // 
             // panel2
             // 

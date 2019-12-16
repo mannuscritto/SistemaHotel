@@ -20,18 +20,30 @@ namespace SistemaHotel
             CarregarGrid();
         }
 
-        private void CarregarGrid()
+        private void CarregarGrid(string termos = "")
         {
             using (hotelEntities ef = new hotelEntities())
             {
                 var dados = ef.cliente
                     .Where(c => c.ativo == true)
-                    .Select(c => new { c.id, c.primeiro_nome, c.ultimo_nome, c.doc_rg })
+                    .Select(c => new 
+                    { 
+                        ID = c.id, 
+                        PrimeiroNome = c.primeiro_nome, 
+                        UltimoNome = c.ultimo_nome, 
+                        RG = c.doc_rg
+                    })
                     .ToList();
                 var autoCompleteDados = ef.cliente
                     .Where(c => c.ativo == true)
                     .Select(c => c.primeiro_nome)
                     .ToArray<string>();
+                if (!termos.Equals(""))
+                {
+                    dados = dados.FindAll(c => c.PrimeiroNome.ToUpper().StartsWith(termos.ToUpper())
+                        || c.UltimoNome.ToUpper().StartsWith(termos.ToUpper())
+                        || c.RG.Replace(",", string.Empty).StartsWith(termos));
+                }
                 dgvClientes.DataSource = dados;
 
                 var source = new AutoCompleteStringCollection();
@@ -73,6 +85,12 @@ namespace SistemaHotel
         private void dgvClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             btnOk.PerformClick();
+        }
+
+        private void txtTermo_TextChanged(object sender, EventArgs e)
+        {
+            string termos = txtTermo.Text;
+            CarregarGrid(termos);
         }
     }
 }
