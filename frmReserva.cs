@@ -222,11 +222,22 @@ namespace SistemaHotel
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            this.Operacao = 'e';
-            int _id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value.ToString());
-            preencherCampos(_id);
-            tcReserva.SelectedTab = tpgCriarReserva;
-            txtCliente.Focus();
+            if (dgvQuartos.CurrentRow != null)
+            {
+                this.Operacao = 'e';
+                int _id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value.ToString());
+                preencherCampos(_id);
+                tcReserva.SelectedTab = tpgCriarReserva;
+                txtCliente.Focus();
+            }
+            else
+            {
+                MessageBox.Show(
+                   "Nenhuma reserva foi selecionada!",
+                   "Editar reserva",
+                   MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+            }
         }
 
         private void preencherCampos(int _id)
@@ -246,7 +257,7 @@ namespace SistemaHotel
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if (dgvQuartos.CurrentRow.Index != -1)
+            if (dgvQuartos.CurrentRow != null)
             {
                 DialogResult opcao = MessageBox.Show(
                     "Tem certeza que deseja excluir essa reserva?",
@@ -265,11 +276,19 @@ namespace SistemaHotel
                     CarregarGrid();
                 }
             }
+            else
+            {
+                MessageBox.Show(
+                    "Nenhuma reserva foi selecionada!",
+                    "Excluir reserva",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         private void btnCheckin_Click(object sender, EventArgs e)
         {
-            if (dgvQuartos.CurrentRow.Index != -1)
+            if (dgvQuartos.CurrentRow != null)
             {
                 DialogResult conf = MessageBox.Show(
                     "Realmente deseja realizar check-in?",
@@ -288,11 +307,19 @@ namespace SistemaHotel
                     CarregarGrid();
                 }
             }
+            else
+            {
+                MessageBox.Show(
+                    "Nenhuma reserva foi selecionada!",
+                    "Checkin de reserva",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         private void btnCheckout_Click(object sender, EventArgs e)
         {
-            if (dgvQuartos.CurrentRow.Index != -1)
+            if (dgvQuartos.CurrentRow != null)
             {                  
                 int _id = Convert.ToInt32(dgvQuartos.CurrentRow.Cells["id"].Value.ToString());
                 using (hotelEntities ef = new hotelEntities())
@@ -322,6 +349,14 @@ namespace SistemaHotel
                     
                 }
                 CarregarGrid();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Nenhuma reserva foi selecionada!",
+                    "Checkout de reserva",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
